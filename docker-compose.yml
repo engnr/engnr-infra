@@ -1,0 +1,9 @@
+version: "3.2"
+
+services:
+  docs:
+    build: docs
+    image: docs
+    container_name: docs
+    volumes:
+      - ..:/home
