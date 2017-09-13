@@ -29,6 +29,9 @@ seqdiag_html_image_format = 'svg'
 
 templates_path = ['_templates']
 
+source_parsers = {
+    '.md': 'recommonmark.parser.CommonMarkParser',
+}
 source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
