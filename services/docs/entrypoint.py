@@ -8,7 +8,7 @@ def main():
   parser = argparse.ArgumentParser(
     description='Documentation generation service.',
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-  parser.add_argument('source', nargs='?', default='docs', help='Source directory')
+  parser.add_argument('-s', '--source', default='docs', help='Source directory')
   parser.add_argument('-o', '--output', default='build-docs', help='Output directory')
   parser.add_argument('-b', '--builder', default='html', help='Sphinx builder type')
   parser.add_argument('--once', action='store_true',
