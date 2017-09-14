@@ -2,6 +2,7 @@
 
 import argparse
 import subprocess
+from termcolor import cprint
 
 
 def main():
@@ -18,10 +19,12 @@ def main():
   if args.once:
     subprocess.run('sphinx-build -b {} {} {}'.format(args.builder, args.source, args.output), shell=True, check=True)
   else:
-    print('''
-      Glad to see you writing documentation!
-      Edit sources using your favourite text editor.
-      Generated output is placed into {} folder.'''.format(args.output))
+    print()
+    result = subprocess.run('httpd -h {}'.format(args.output), shell=True)
+    if result.returncode == 0:
+        print('Server started successfully.')
+    else:
+        cprint('Failed to launch server. Open files in a browser manually as a fallback.', 'yellow')
 
     while True:
       print('\n====================================================================\n')
@@ -31,7 +34,7 @@ def main():
           --exclude '/\..+' --exclude '/.+~' --exclude '/.+.sw?' \
           {1} && \
         sphinx-build -b {0} {1} {2} \
-        '''.format(args.builder, args.source, args.output), shell=True, check=True)
+        '''.format(args.builder, args.source, args.output), shell=True)
       
 
 if __name__ == "__main__":

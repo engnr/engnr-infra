@@ -8,7 +8,7 @@ import textwrap
 
 
 def build_docker_image(args):
-  subprocess.run('docker-compose build docs', shell=True, check=True)
+  subprocess.run('docker-compose build docs', shell=True)
 
 
 def init_docs(args):
@@ -33,11 +33,13 @@ def watch_docs(args):
   output_path = '../{}'.format(args.output)
   print(textwrap.dedent(
     '''
-    Watching {} for change events.
-    Output will be generated to {}.
-    '''.format(source_path, output_path)))
+    Glad to see you writing documentation!
+    Edit files in {} using your favourite text editor.
+    Each time change event occurs documentation is generated to {}.
+    You may see results at localhost:{} (HTML builder only).
+    '''.format(source_path, output_path, args.port)))
 
-  subprocess.run('docker-compose run docs -s {} -o {} -b {}'.format(args.source, args.output, args.builder), shell=True, check=True)
+  subprocess.run('docker-compose run --rm -p {}:80 docs -s {} -o {} -b {}'.format(args.port, args.source, args.output, args.builder), shell=True)
 
 
 def build_docs(args):
@@ -49,7 +51,7 @@ def build_docs(args):
     Output will be generated to {}.
     '''.format(source_path, output_path)))
 
-  subprocess.run('docker-compose run docs --once -s {} -o {} -b {}'.format(args.source, args.output, args.builder), shell=True, check=True)
+  subprocess.run('docker-compose run --rm docs --once -s {} -o {} -b {}'.format(args.source, args.output, args.builder), shell=True)
 
 
 def main():
@@ -83,6 +85,7 @@ def main():
   watch_parser.add_argument('-s', '--source', default='docs', help='Source directory')
   watch_parser.add_argument('-o', '--output', default='build-docs', help='Output directory')
   watch_parser.add_argument('-b', '--builder', default='html', help='Sphinx builder type')
+  watch_parser.add_argument('-p', '--port', type=int, default=4000, help='Port to serve documentation set on')
   watch_parser.set_defaults(func=watch_docs)
 
   build_help = 'Generate documentation once'

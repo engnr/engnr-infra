@@ -26,10 +26,10 @@ This repo contains various facilities for:
 
 1. Now edit documentation sources using your favourite text editor.
 
-   Use browser of your choice to open `index.html` page. Hint: there are various browser
+   Use browser of your choice to access `localhost:4000`. Hint: there are various browser
    plugins which can reload page automatically for your further convenience.
 
-1. Use `scripts/docs.py build` to power up your CI system for documentation publishing
+1. Use `scripts/docs.py build` to power up your CI system with documentation publishing
    to GitHub/GitLab pages, etc.
 
 **Note.** Run `scripts/docs.py` without any arguments or pass `--help` to see help message.

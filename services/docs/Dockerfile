@@ -4,7 +4,8 @@ RUN apk update && apk upgrade
 
 RUN apk add --no-cache \
     python3 \
-  && pip3 install -U \
+  && pip3 install -U --no-cache-dir \
+    termcolor \
     sphinx \
     sphinx_bootstrap_theme \
     sphinxbootstrap4theme \
@@ -18,7 +19,7 @@ RUN apk add --no-cache --virtual=dependencies \
     jpeg-dev \
     python3-dev \
     zlib-dev \
-  && pip3 install -U \
+  && pip3 install -U --no-cache-dir \
     sphinxcontrib-blockdiag \
     sphinxcontrib-actdiag \
     sphinxcontrib-nwdiag \
@@ -27,7 +28,7 @@ RUN apk add --no-cache --virtual=dependencies \
 
 RUN apk add --no-cache \
     doxygen \
-  && pip3 install -U \
+  && pip3 install -U --no-cache-dir \
     breathe
 
 ENV PLANTUML_VERSION 1.2017.16
@@ -50,3 +51,4 @@ RUN apk add --no-cache \
 WORKDIR /home
 COPY entrypoint.py /entrypoint.py
 ENTRYPOINT ["/entrypoint.py"]
+EXPOSE 80
