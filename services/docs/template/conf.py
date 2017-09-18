@@ -13,6 +13,7 @@ copyright = '2017, Engnr'
 author = 'Engnr team'
 
 extensions = [
+    'sphinx.ext.mathjax',
     'sphinxcontrib.actdiag',
     'sphinxcontrib.blockdiag',
     'sphinxcontrib.nwdiag',                  
